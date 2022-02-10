@@ -5,9 +5,9 @@ import { ListStyle } from './ContactList.styled';
 export const ContactList = ({visibleContact,onDeleteContact}) => {
   return (
     <ListStyle>
-      {visibleContact.map((data,id) => {
+      {visibleContact.map(({name, id, number} ) => {
         return (
-          <ContactListItem key={id} data={data} onDeleteContact={onDeleteContact} />
+          <ContactListItem key={id} data={{ number, name, id }} onDeleteContact={onDeleteContact} />
         );
       })}
     </ListStyle>
