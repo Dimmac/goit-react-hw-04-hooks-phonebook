@@ -25,20 +25,15 @@ export default function ContactForm({ formSubmit }) {
         console.log(`Field type name - ${name} is not processed`);
     }
   };
-
   const handleSubmit = (evt) => {
     evt.preventDefault();
-
     formSubmit({ name, number });
-
     reset();
   };
-
   const reset = () => {
     setName("");
     setNumber("");
   };
-
   return (
     <FormPhoneBook onSubmit={handleSubmit}>
       <LabelPhoneBook htmlFor={nameInputId}>

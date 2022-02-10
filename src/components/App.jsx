@@ -16,47 +16,35 @@ export default function App() {
   const formSubmitHandler = (data) => {
     const { name } = data;
     const normalizedNameContact = name.toLowerCase();
-
-    const newId = { id: nanoid(), ...data };
-
+    const newContact = { id: nanoid(), ...data };
     findContactName(normalizedNameContact)
       ? alert(`${name} is already in contacts.`)
-      : setContacts((previousState) => [...previousState, newId]);
-
-console.log(newId);
+      : setContacts((previousState) => [...previousState, newContact]);
   };
-
   const findContactName = (nameData) => {
     return contacts.find(({ name }) => name.toLowerCase() === nameData);
   };
-
   const deleteContact = (contactId) => {
     setContacts((prevState) => prevState.filter(({ id }) => id !== contactId));
   };
-
   const changeFilter = (evt) => {
     setFilter(evt.currentTarget.value);
   };
-
   const getFilterContact = () => {
     const normalizedFilter = filter.toLowerCase();
     return contacts.filter(({ name }) =>
       name.toLowerCase().includes(normalizedFilter)
     );
   };
-
   return (
     <Container>
       <Section>
         <TitlePhoneBook>Phonebook</TitlePhoneBook>
         <ContactForm formSubmit={formSubmitHandler}></ContactForm>
       </Section>
-
       <Section>
         <TitleContacts>Contacts</TitleContacts>
-
         <Filter value={filter} onChange={changeFilter}></Filter>
-
         <ContactList
           visibleContact={getFilterContact()}
           onDeleteContact={deleteContact}
